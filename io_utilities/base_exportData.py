@@ -12,7 +12,7 @@ class base_exportData():
 
     def write_dict2csv(self,filename,headers=None):
         # write dict to csv
-        with open(filename, 'w') as f:
+        with open(filename, 'w',newline='') as f:
             if headers: fieldname = headers;
             else: fieldname = list(self.data[0].keys())
             writer = csv.DictWriter(f, fieldnames = fieldname)
@@ -24,12 +24,12 @@ class base_exportData():
 
     def write_dict2json(self,filename):
         # write dict to json file
-        with open(filename, 'w') as outfile:
+        with open(filename, 'w',newline='') as outfile:
             json.dump(self.data, outfile, indent=4);
 
     def write_dict2tsv(self,filename):
         # write dict to tsv
-        with open(filename, 'w') as f:
+        with open(filename, 'w',newline='') as f:
             writer = csv.DictWriter(f,fieldnames = list(self.data[0].keys()),dialect = 'excel-tab')
             try:
                 writer.writeheader();
@@ -46,7 +46,7 @@ class base_exportData():
         for i in range(len(columns_I)):
             rows[i].insert(0,columns_I[i]);
 
-        with open(filename, 'w') as f:
+        with open(filename, 'w',newline='') as f:
             writer = csv.writer(f);
             try:
                 writer.writerow(header);
@@ -56,7 +56,7 @@ class base_exportData():
 
     def write_headersAndElements2csv(self,header_I,filename):
         # write data to csv file
-        with open(filename, 'w') as f:
+        with open(filename, 'w',newline='') as f:
             writer = csv.writer(f);
             try:
                 writer.writerows(header_I);
@@ -66,7 +66,7 @@ class base_exportData():
 
     def write_headersAndElements2txt(self,header_I,filename):
         # write data to txt file
-        with open(filename, 'w') as f:
+        with open(filename, 'w',newline='') as f:
             writer = csv.writer(f, delimiter='\t');
             try:
                 writer.writerows(header_I);
