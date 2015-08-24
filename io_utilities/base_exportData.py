@@ -3,7 +3,12 @@ import csv, sys, json
 class base_exportData():
     """a class to export data"""
 
-    def __init__(self,data_I):
+    def __init__(self,data_I=[]):
+        if data_I: self.add_data(data_I);
+        else: self.data = [];
+
+    def add_data(self,data_I):
+        """add data"""
         self.data = data_I;
 
     def clear_data(self):
