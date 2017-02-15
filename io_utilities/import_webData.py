@@ -1,4 +1,5 @@
 ﻿from .base_importData import base_importData
+import zipfile
 #System dependences (get_request)
 import requests, sys
 #System dependencies (ftp)
@@ -113,7 +114,6 @@ class import_webData(base_importData):
         ftp = FTP(server)
         ftp.login(user = username, passwd = password)
         return ftp;
-
     def get_ftp(
         self,server,ext,filename,username=None,password=None):
         '''
@@ -168,6 +168,7 @@ class import_webData(base_importData):
         #upload the file
         ftp.storbinary('STOR '+filename, open(filename, 'rb'))
         ftp.quit()
+
     def parse_binaryFile(
         self,
         file,

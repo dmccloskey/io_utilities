@@ -1,4 +1,8 @@
-﻿import csv, sys, json
+﻿import csv, sys, json, io
+#System dependencies (write_binaryFile)
+import shutil
+#System dependencies (compressed files)
+import zipfile, gzip, bz2, tarfile
 
 class base_exportData():
     """a class to export data"""
@@ -13,7 +17,8 @@ class base_exportData():
 
     def clear_data(self):
         """clear existing data"""
-        del self.data[:];
+        #del self.data[:];
+        self.data = None;
 
     def write_dict2csv(self,filename,headers=None):
         # write dict to csv
@@ -85,3 +90,28 @@ class base_exportData():
         with open(filename,'w') as file:
             file.write(json_str);
 
+    def write_binaryFile(self,filename,length=131072):
+        '''Write a binary file stream to disk
+        INPUT:
+        filename = string
+        self.data = binary file stream
+        length = chunks of memory to write to disk
+        '''
+        ##write from the start of the file
+        #file.seek(0)
+        if type(self.data)==type(b''):
+            data = io.BytesIO(self.data)
+        elif type(self.data)==type(io.BytesIO()):
+            data = self.data;
+        with open(filename,mode='wb') as f:
+            shutil.copyfileobj(data, f, length=length)
+
+    def write_binary2gz(self,filename,length=131072):
+        '''Write a binary file stream to disk in gz compression
+        INPUT:
+        filename = string
+        self.data = binary file stream
+        length = chunks of memory to write to disk
+        '''
+        with gzip.open(filename, 'wb') as f:
+            shutil.copyfileobj(self.data, f, length=length)

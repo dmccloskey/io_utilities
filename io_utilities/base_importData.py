@@ -1,4 +1,8 @@
-import csv, sys, json
+﻿import csv, sys, json
+#System dependencies (write_binaryFile)
+import shutil
+#System dependencies (compressed files)
+import zipfile, gzip, bz2, tarfile
 
 class base_importData():
     """a class to import data"""
@@ -82,3 +86,10 @@ class base_importData():
         '''import values from a json file'''
         data = json.load(open(filename))
         self.data = data;
+
+    #TODO: test
+    def read_gz(self, filename):
+        '''import values from a gz file'''
+        
+        with gzip.open(filename, 'rb') as f:
+            self.data = f.decompress();
