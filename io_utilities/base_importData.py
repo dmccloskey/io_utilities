@@ -1,4 +1,4 @@
-﻿import csv, sys, json
+﻿import csv, sys, json, copy
 #System dependencies (write_binaryFile)
 import shutil
 #System dependencies (compressed files)
