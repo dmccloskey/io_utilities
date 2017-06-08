@@ -12,7 +12,8 @@ class base_importData():
 
     def clear_data(self):
         """clear existing data"""
-        del self.data[:];
+        #del self.data[:];
+        self.data = [];
 
     def getData(self):
         """get data
