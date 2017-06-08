@@ -14,6 +14,23 @@ class base_importData():
         """clear existing data"""
         del self.data[:];
 
+    def getData(self):
+        """get data
+        
+        Returns
+            data (list,dict)
+            
+        """
+        return copy.copy(self.data);
+
+    def setData(self,data_I):
+        """set data
+        Args
+            data_I (list,dict)
+            
+        """
+        self.data = data_I;
+
     def format_data(self):
         """remove specific sequences for utf-8 compatibility"""
         if self.data:
@@ -38,11 +55,11 @@ class base_importData():
             del self.data[:];
             self.data = data_cpy;
                    
-    def read_csv(self, filename):
+    def read_csv(self, filename, delimiter=','):
         """read table data from csv file"""
         try:
             with open(filename, 'r') as csvfile:
-                reader = csv.DictReader(csvfile);
+                reader = csv.DictReader(csvfile, delimiter=delimiter);
                 try:
                     keys = reader.fieldnames;
                     for row in reader:
